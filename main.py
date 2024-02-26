@@ -8,8 +8,6 @@ def main():
     file1 = open("pdf.txt", 'r')
     bird_array = dict()
     plane_array = dict()
-    i = 0
-    j = 0
     lines = file1.readlines()
     line = lines[0]
     line = line.strip('\n')
@@ -18,17 +16,6 @@ def main():
     # Creates dictionary of probabilities where each index is a velocity
     # increasing by 0.5 from 0 -> 200 and at each index there is the
     # likelihood of the bird or plane traveling at that speed
-    j = 0
-    for i in range (0, 400):
-        bird_array[j] = float(x[i])
-        j += 0.5
-    line = lines[1]
-    line = line.strip('\n')
-    x = line.split(',')
-    i = 0
-    for j in range (0, 400):
-        plane_array[i] = float(x[j])
-        i += 0.5
 
     # Creates a nested list of all of the observation data
     file2 = open("data.txt", 'r')
@@ -60,6 +47,14 @@ def main():
 def pretty_print (result):
     for i in range(0,10):
         print("[", i + 1, "]: ", result[i])
+
+def make_prob_dict(increment, steps):
+    j = 0
+    object_array = dict()
+    for i in range (0, steps):
+        object_array[j] = float(x[i])
+        j += increment
+    return object_array
 
 # The main implementation of the naive Bayesian algorithm             
 def run (bird_array, plane_array, data_array):
